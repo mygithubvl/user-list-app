@@ -35,22 +35,7 @@ export class UserService {
   }
 
   getUsers(): Observable<IUser[]> {
-
-    // if (this.users.length > 0) {
-    //   return from<IUser[]>(this.users, asyncScheduler).pipe(
-    //     tap( userData => console.log(JSON.stringify(userData))),
-    //     catchError(this.handleError)
-    //   );
-
-    // } else {
-    //   return this.http.get<IUser[]>(`${this.usersUrl}${this.usersLimit}`)
-    //   .pipe(
-    //     tap( userData => console.log(JSON.stringify(userData))),
-    //     tap( userData => this.users = userData),
-    //     catchError(this.handleError)
-    //   );
-    // }
-
+    
     return this.http.get<IUser[]>(`${this.usersUrl}${this.usersLimit}`)
       .pipe(
         tap( userData => console.log(JSON.stringify(userData))),

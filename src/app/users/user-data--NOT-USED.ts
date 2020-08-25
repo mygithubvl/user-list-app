@@ -3,6 +3,11 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { IUser } from '../models/user.model';
 
 
+// Below data should be used in off-line mode with 
+// InMemoryWebApiModule Angular module, when real API links such as below
+// 'https://jsonplaceholder.typicode.com/users' (as used in this 'user-list-app'),
+// are not available;
+
 export class UsersDB implements InMemoryDbService {
 
   createDb() {
