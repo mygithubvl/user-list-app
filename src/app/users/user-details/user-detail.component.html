@@ -1,0 +1,51 @@
+<div class="card">
+  <div class="card-header"
+       *ngIf="user">
+    {{pageTitle}}<span>: <strong>{{user.name}}</strong></span>
+  </div>
+
+  <div class="card-body"
+       *ngIf="user">
+
+    <div class="row">
+
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-3">Id:</div>
+          <div class="col-md-6">{{user.id}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Name:</div>
+          <div class="col-md-6">{{user.name}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">User Name:</div>
+          <div class="col-md-6">{{user.username}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Email:</div>
+          <div class="col-md-6">{{user.email}}</div>
+        </div>
+      </div>      
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <button class="btn btn-outline-secondary mr-3"
+                style="width:80px"
+                (click)="onClickBack()">
+          <i class="fa fa-chevron-left"></i> Back
+        </button>
+        <button class="btn btn-outline-primary"
+                style="width:80px"
+                [routerLink]="['/users', user.id, 'edit']"> Edit
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="alert alert-danger"
+       *ngIf="errorMessage">{{errorMessage}}
+  </div>
+</div>
