@@ -1,0 +1,60 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6"></div>
+      <div class="col-md-2">Search by name:</div>
+      <div class="col-md-2">
+        <input type="text"
+               [(ngModel)]="listFilter" />
+      </div>
+    </div>
+    
+    <div class="table-responsive">
+      <table class="table mb-0"
+             *ngIf="users && users.length">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>User</th>
+            <th>UserName</th>
+            <th>Email</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of filteredUsers">
+            <td>{{ user.id }}</td>
+            <td>
+              <a [routerLink]="['/users', user.id]"
+                 (click)='onSelected(user)'>
+                {{ user.name }}
+              </a>
+            </td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              <button class="btn btn-outline-primary btn-sm"
+                      (click)='onSelected(user)'
+                      [routerLink]="['/users', user.id, 'edit']">Edit
+              </button>
+            </td>
+            <td>
+              <button *ngIf="user.updated" 
+                       type="button" class="btn btn-success btn-sm"> Updated </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="errorMessage"
+     class="alert alert-danger">
+  Error: {{ errorMessage }}
+</div>

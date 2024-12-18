@@ -1,0 +1,146 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <div class="card-body">
+    <form novalidate
+          (ngSubmit)="saveUser()"
+          [formGroup]="userForm">
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="nameId">Name</label>
+        <div class="col-md-5">
+          <input class="form-control"
+                 id="nameId"
+                 type="text"
+                 placeholder="Name (required)"
+                 formControlName="name"
+                 [ngClass]="{'is-invalid': displayMessage['name'] }" />
+          <span class="invalid-feedback">
+            {{displayMessage['name']}}
+          </span>
+        </div>
+        <div *ngIf="readyUpdate" class="col-md-5">
+          (Orig. value: {{user.name}})
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="usernameId">Username</label>
+        <div class="col-md-5">
+          <input class="form-control"
+                 id="usernameId"
+                 type="text"
+                 placeholder="Username (required)"
+                 formControlName="username"
+                 [ngClass]="{'is-invalid': displayMessage['username']}" />
+          <span class="invalid-feedback">
+            {{displayMessage['username']}}
+          </span>
+        </div>
+        <div *ngIf="readyUpdate" class="col-md-5">
+          (Orig. value: {{user.username}})
+        </div>
+      </div>      
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="emailId">Email</label>
+        <div class="col-md-5">
+          <input class="form-control"
+                 id="emailId"
+                 type="text"
+                 placeholder="Email (required)"
+                 formControlName="email"
+                 [ngClass]="{'is-invalid': displayMessage['email']}" />
+          <span class="invalid-feedback">
+            {{displayMessage['email']}}
+          </span>
+        </div>
+        <div *ngIf="readyUpdate" class="col-md-5">
+          (Orig. value: {{user.email}})
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="phoneId">Phone</label>
+        <div class="col-md-5">
+          <input class="form-control"
+                 id="phoneId"
+                 type="text"
+                 placeholder="Phone (optional)"
+                 formControlName="phone" />
+          <span class="invalid-feedback">
+            {{displayMessage['phone']}}
+          </span>
+        </div>
+        <div *ngIf="readyUpdate" class="col-md-5">
+          (Orig. value: {{user.phone}})
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="websiteId">Website</label>
+        <div class="col-md-5">
+          <input class="form-control"
+                 id="websiteId"
+                 type="text"
+                 placeholder="Website (optional)"
+                 formControlName="website" />
+          <span class="invalid-feedback">
+            {{displayMessage['website']}}
+          </span>
+        </div>
+        <div *ngIf="readyUpdate" class="col-md-5">
+          (Orig. value: {{user.website}})
+        </div>
+      </div>      
+
+      <div class="form-group row mb-2">
+        <div class="offset-md-2 col-md-8">
+          <button class="btn btn-primary mr-3"
+                  style="width:80px;"
+                  type="submit"
+                  [title]="userForm?.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                  [disabled]="!userForm?.valid || readyUpdate"> Save </button>
+
+          <button class="btn btn-outline-secondary mr-3"
+                  style="width:80px;"
+                  type="button"
+                  title="Cancel your edits"
+                  [routerLink]="['/users']"> Cancel </button>
+
+          <button class="btn btn-outline-warning"
+                  style="width:80px"
+                  type="button"
+                  title="Delete user"
+                  (click)="deleteUser()"> Delete </button>
+          
+          <button *ngIf="readyUpdate"
+                  class="btn btn-primary mr-3 confirm-update"
+                  style="width:140px"
+                  type="button"
+                  title="Confirm update"
+                  (click)="onConfirmUpdate()"> Confirm update </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="alert alert-danger"
+       *ngIf="errorMessage">{{errorMessage}}
+  </div>
+
+  <!-- <br>Original: 
+  <pre>{{user | json}}</pre>
+  <br> -->
+  <br>Dirty: {{ userForm.dirty }}
+  <br>Touched: {{ userForm.touched }}
+  <br>Valid: {{ userForm.valid }}
+  <br>Value: {{ userForm.value | json }}
+</div>
